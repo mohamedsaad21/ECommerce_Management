@@ -16,6 +16,8 @@ namespace ECommerce_Management_MVC.Models
         public string Category { get; set; }
         public DateTime CreateDate { get; set; }
         public int Stock { get; set; }
-        public virtual List<OrderDetail> orderDetails { get; set; } = new List<OrderDetail>();
+        public virtual List<OrderDetail> orderDetails { get; set; }
+        public virtual List<product_category> productCategories { get; set; }
+       
     }
 }
