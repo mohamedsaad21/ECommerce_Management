@@ -1,0 +1,37 @@
+﻿@model List<category>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+            <th scope="col">thumbnail</th>
+            <th scope="col" class="text-center">Edit</th>
+            <th scope="col" class="text-center">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.id</th>
+                <td>@item.name</td>
+                <td>@item.description</td>
+                <td>@item.thumbnail</td>
+                <td class="text-center">
+                    <a href="/Categories/GoToEditForm/@item.id" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+                <td class="text-center">
+                    <a href="/Categories/Delete/@item.id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form action="/Categories/GoToAddForm">
+    <button type="submit" class="btn btn-primary mt-3">Add</button>
+</form>
+
+

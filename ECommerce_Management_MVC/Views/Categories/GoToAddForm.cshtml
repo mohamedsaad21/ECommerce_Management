@@ -1,0 +1,18 @@
+﻿@model category
+<form action="/Categories/SaveFormData" class="p-4 border rounded shadow-lg bg-light">
+    <div class="form-group mb-3">
+        <label for="name" class="form-label fw-bold">Name</label>
+        <input type="text" class="form-control" name="_name" id="name" placeholder="Enter Name">
+    </div>
+    <div class="form-group mb-3">
+        <label for="description" class="form-label fw-bold">Description</label>
+        <input type="text" class="form-control" name="_description" id="description" placeholder="Enter description">
+    </div>
+    <div class="form-group mb-4">
+        <label for="thumbnail" class="form-label fw-bold">Thumbnail</label>
+        <input type="text" class="form-control" name="_thumbnail" id="thumbnail" placeholder="Enter thumbnail">
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg w-100">Add Category</button>
+</form>
+
+
