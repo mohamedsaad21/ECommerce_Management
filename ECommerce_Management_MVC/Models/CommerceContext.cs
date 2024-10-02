@@ -19,7 +19,12 @@ namespace ECommerce_Management_MVC.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+<<<<<<< HEAD
             base.OnConfiguring(optionsBuilder);
+=======
+            optionsBuilder.UseSqlServer("Server=DESKTOP-4QPCOQT;Database=ECDB;Trusted_Connection=True;TrustServerCertificate=True");
+            // base.OnConfiguring(optionsBuilder);
+>>>>>>> e7df1d7d58bbba19a196a1ec157d0e2985f92e47
         }
     }
 }

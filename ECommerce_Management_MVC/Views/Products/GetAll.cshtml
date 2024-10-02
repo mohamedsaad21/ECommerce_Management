@@ -1,0 +1,51 @@
+﻿@model List<Product>
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th scope="col">Sku</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Descriptions</th>
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Image</th>
+            <th scope="col">Category</th>
+            <th scope="col">CreateDate</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Add</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+               
+                <td>@item.Sku</td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Weight</td>
+                <td>@item.Descriptions</td>
+                <td>@item.Thumbnail</td>
+                <td>@item.Image</td>
+                <td>@item.Category</td>
+                <td>@item.CreateDate</td>
+                <td>@item.Stock</td>
+                <td>
+                    <a href="/Products/GoToAddForm/@item.Id">Add</a>
+                </td>
+                <td>
+                    <a href="/Products/GoToEditForm/@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a href="/Products/Delete/@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
