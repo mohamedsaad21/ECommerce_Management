@@ -15,7 +15,7 @@ namespace ECommerce_Management_MVC.Models
         public string Sku { get; set; }
         public int Quantity { get; set; }
         public Product Products { get; set; }
-        public virtual Orders Order { get; set; }
+        public virtual Order Order { get; set; }
         
     }
 }
