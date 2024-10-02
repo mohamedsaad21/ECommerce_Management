@@ -16,7 +16,7 @@ namespace ECommerce_Management_MVC.Models
         public virtual DbSet<OrderDetail> OrderDetailss { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=ZIZOMACBOOKPRO\\SQL2022;Database=ECDB;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-4QPCOQT;Database=ECDB;Trusted_Connection=True;TrustServerCertificate=True");
             // base.OnConfiguring(optionsBuilder);
         }
     

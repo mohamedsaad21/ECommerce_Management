@@ -2,6 +2,9 @@
 
 namespace ECommerce_Management_MVC.Models
 {
+    /*
+        اروح ل get all 
+     */
     public class Product
     {
         [Key]
