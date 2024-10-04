@@ -44,11 +44,12 @@ namespace ECommerce_Management_MVC.Controllers
         public IActionResult Add(int id)
         {
             OrderViewModel orderViewModel = new OrderViewModel();
+            orderViewModel.productId = id;
             return View(orderViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveAdd(int id, OrderViewModel OrderVM)
+        public async Task<IActionResult> SaveAdd(OrderViewModel OrderVM)
         {
             if (ModelState.IsValid)
             {
@@ -64,9 +65,21 @@ namespace ECommerce_Management_MVC.Controllers
                     Order_Status = OrderVM.Order_Status,
                 };
                 order.Order_Date = DateTime.Now;
-                _orderRepository.Add(order);
+                order = _orderRepository.Add(order);
                 _orderRepository.Save();
-                
+                var product = _productRepository.GetById(OrderVM.productId);
+                if (product == null)
+                    return NotFound();
+                var orderDetails = new OrderDetail
+                {
+                    ProductId = product.Id,
+                    OrderId = order.Id,
+                    Price = product.Price,
+                    Sku = product.Sku,
+                    Quantity = product.Stock
+                };
+                _orderDetailRepository.Add(orderDetails);
+                _orderDetailRepository.Save();
 				return RedirectToAction(nameof(GetAll));
             }
             return View(nameof(Add), OrderVM);

@@ -18,7 +18,7 @@
                     </div>
                     <h3>@product.Name</h3>
                     <p class="product-price"><span>Per Kg</span> 85$ </p>
-                    <a asp-controller="Order" asp-action="Add" asp-route-id="id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    <a asp-controller="Order" asp-action="Add" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     <a asp-action="GoToEditForm" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Edit</a>
                     <a asp-action="Delete" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Delete</a>
                 </div>

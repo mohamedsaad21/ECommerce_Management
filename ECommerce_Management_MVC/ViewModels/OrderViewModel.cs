@@ -7,6 +7,7 @@ namespace ECommerce_Management_MVC.ViewModels
     public class OrderViewModel
     {
         public int Id { get; set; }
+        public int productId { get; set; }
         public int amount { get; set; }
         public string Shipping_Address { get; set; }
         public string Order_Address { get; set; }
