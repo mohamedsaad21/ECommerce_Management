@@ -24,6 +24,7 @@ namespace ECommerce_Management_MVC
             builder.Services.AddScoped<IEntityRepository<Category>,  CategoryRepository>();
             builder.Services.AddScoped<IEntityRepository<Order>,  OrderRepository>();
             builder.Services.AddScoped<IEntityRepository<product_category>, Product_CategoriesRepository>();
+            builder.Services.AddScoped<IEntityRepository<OrderDetail>, Order_DetailsRepository>();
 
             var app = builder.Build();
 

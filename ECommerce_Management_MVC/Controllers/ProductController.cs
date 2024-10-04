@@ -86,14 +86,15 @@ namespace ECommerce_Management_MVC.Controllers
                     product.Image = dataStream2.ToArray();
                 }
                 product = _productsRepository.Add(product);
-                var productCategory = new product_category
+                _productsRepository.Save();
+                product_category pc = new product_category
                 {
-                    category_id = ProductVM.CategoryId,
+                    category_id = product.CategoryId,
                     product_id = product.Id,
                 };
-                _productsRepository.Save();
-                _product_categoryRepository.Add(productCategory);
-                return RedirectToAction("GetAll");   
+                _product_categoryRepository.Add(pc);
+                _product_categoryRepository.Save();
+                return RedirectToAction("GetAll");
             }
             ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(nameof(GoToAddForm), ProductVM);

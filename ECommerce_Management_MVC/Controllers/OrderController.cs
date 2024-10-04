@@ -11,12 +11,16 @@ namespace ECommerce_Management_MVC.Controllers
     public class OrderController : Controller
     {
         private readonly IEntityRepository<Order> _orderRepository;
+        private readonly IEntityRepository<Product> _productRepository;
+        private readonly IEntityRepository<OrderDetail> _orderDetailRepository;
         private readonly UserManager<Customer> _userManager;
 
-        public OrderController(IEntityRepository<Order> orderRepository, UserManager<Customer> userManager)
+        public OrderController(IEntityRepository<Order> orderRepository, UserManager<Customer> userManager, IEntityRepository<Product> productRepository, IEntityRepository<OrderDetail> orderDetailRepository)
         {
             _orderRepository = orderRepository;
             _userManager = userManager;
+            _productRepository = productRepository;
+            _orderDetailRepository = orderDetailRepository;
         }
 
         public IActionResult Index()
@@ -37,14 +41,14 @@ namespace ECommerce_Management_MVC.Controllers
                 return NotFound();
             return View(order);
         }
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
             OrderViewModel orderViewModel = new OrderViewModel();
             return View(orderViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveAdd(OrderViewModel OrderVM)
+        public async Task<IActionResult> SaveAdd(int id, OrderViewModel OrderVM)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +66,20 @@ namespace ECommerce_Management_MVC.Controllers
                 order.Order_Date = DateTime.Now;
                 _orderRepository.Add(order);
                 _orderRepository.Save();
-                return RedirectToAction(nameof(GetAll));
+                var product = _productRepository.GetById(id);
+                if(product == null)
+                    return NotFound();
+				var pc = new OrderDetail
+				{
+					OrderId = order.Id,
+                    ProductId = product.Id,
+                    Price = product.Price,
+                    Sku = product.Sku,
+                    Quantity = product.Stock
+				};
+				_orderDetailRepository.Add(pc);
+                _orderDetailRepository.Save();
+				return RedirectToAction(nameof(GetAll));
             }
             return View(nameof(Add), OrderVM);
         }

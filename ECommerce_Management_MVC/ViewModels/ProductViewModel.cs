@@ -15,11 +15,11 @@ namespace ECommerce_Management_MVC.ViewModels
         [Required]
         public float Weight { get; set; }
         [Required]
-        [MaxLength(250), MinLength(30)]
+        [MaxLength(250), MinLength(5)]
         public string Descriptions { get; set; }
         public IFormFile? Thumbnail { get; set; }
         public IFormFile? Image { get; set; }
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public DateTime CreateDate { get; set; }
         public int Stock { get; set; }
         public virtual List<OrderDetail>? orderDetails { get; set; }

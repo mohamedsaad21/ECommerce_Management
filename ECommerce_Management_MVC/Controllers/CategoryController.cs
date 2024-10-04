@@ -92,8 +92,8 @@ namespace ECommerce_Management_MVC.Controllers
         }
         public IActionResult Delete(int id)
         {
-            Category std = _categoryRepository.GetById(id);
-            _categoryRepository.Delete(std);
+            var category = _categoryRepository.GetById(id);
+            _categoryRepository.Delete(category);
             _categoryRepository.Save();
             return RedirectToAction("GetAll");
         }

@@ -24,6 +24,7 @@ namespace ECommerce_Management_MVC.Repositories
         public Product Add(Product entity)
         {
             _commerceContext.Products.Add(entity);
+            _commerceContext.SaveChanges();
             return entity;
         }
         public void Update(Product entity)
