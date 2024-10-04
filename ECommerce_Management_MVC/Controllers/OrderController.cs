@@ -66,19 +66,7 @@ namespace ECommerce_Management_MVC.Controllers
                 order.Order_Date = DateTime.Now;
                 _orderRepository.Add(order);
                 _orderRepository.Save();
-                var product = _productRepository.GetById(id);
-                if(product == null)
-                    return NotFound();
-				var pc = new OrderDetail
-				{
-					OrderId = order.Id,
-                    ProductId = product.Id,
-                    Price = product.Price,
-                    Sku = product.Sku,
-                    Quantity = product.Stock
-				};
-				_orderDetailRepository.Add(pc);
-                _orderDetailRepository.Save();
+                
 				return RedirectToAction(nameof(GetAll));
             }
             return View(nameof(Add), OrderVM);
