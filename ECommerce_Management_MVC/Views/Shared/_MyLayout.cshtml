@@ -1,141 +1,189 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>QuickCart - @ViewData["Title"]</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+	<!-- title -->
+	<title>QuickCart</title>
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/templatemo.css">
-    <link rel="stylesheet" href="~/css/custom.css">
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="/css/all.min.css">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="/css/owl.carousel.css">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="/css/magnific-popup.css">
+	<!-- animate css -->
+	<link rel="stylesheet" href="/css/animate.css">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="/css/meanmenu.min.css">
+	<!-- main style -->
+	<link rel="stylesheet" href="/css/main.css">
+	<!-- responsive -->
+	<link rel="stylesheet" href="/css/responsive.css">
+	<link rel="stylesheet" href="~/css/site.css"/>
 
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="~/css/fontawesome.min.css">
-    <!--
-
-    TemplateMo 559 Zay Shop
-
-    https://templatemo.com/tm-559-zay-shop
-
-    -->
 </head>
-
 <body>
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                QuickCart
-            </a>
+	<!--PreLoader-->
+	<div class="loader">
+		<div class="loader-inner">
+			<div class="circle"></div>
+		</div>
+	</div>
+	<!--PreLoader Ends-->
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="index.html">
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+							</a>
+						</div>
+						<!-- logo -->
+						<!-- menu start -->
+						<nav class="main-menu">
+							<ul>
+								<li class="current-list-item">
+									<a href="#">Home</a>
+									<ul class="sub-menu">
+										<li><a href="index.html">Static Home</a></li>
+										<li><a href="index_2.html">Slider Home</a></li>
+									</ul>
+								</li>
+								<li><a href="about.html">About</a></li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Product" asp-action="GetAll">Product</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Category" asp-action="GetAll">Category</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Order" asp-action="GetAll">Order</a>
+								</li>
+								<partial name="_LoginPartial" />
+								<li>
+									<a href="#">Pages</a>
+									<ul class="sub-menu">
+										<li><a href="404.html">404 page</a></li>
+										<li><a href="about.html">About</a></li>
+										
+										<li><a href="cart.html">Cart</a></li>
+										<li><a href="checkout.html">Check Out</a></li>
+										<li><a href="contact.html">Contact</a></li>
+										<li><a href="news.html">News</a></li>
+										<li><a href="shop.html">Shop</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="news.html">News</a>
+									<ul class="sub-menu">
+										<li><a href="news.html">News</a></li>
+										<li><a href="single-news.html">Single News</a></li>
+									</ul>
+								</li>
+								<li><a href="contact.html">Contact</a></li>
+								<li>
+									<a href="shop.html">Shop</a>
+									<ul class="sub-menu">
+										<li><a href="shop.html">Shop</a></li>
+										<li><a href="checkout.html">Check Out</a></li>
+										<li><a href="single-product.html">Single Product</a></li>
+										<li><a href="cart.html">Cart</a></li>
+									</ul>
+								</li>
+								
+							</ul>
+						</nav>
+						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <partial name="_LoginPartial"/>
-                </div>
-            </div>
-
-        </div>
-    </nav>
-    <!-- Close Header -->
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="container">
-        <main role="main" class="mt-5 pb-3 py-5 min-vh-100">
-            @RenderBody()
-        </main>
-    </div>
-
-    <!-- Start Banner Hero -->
-    <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
-        <div class="w-100 bg-black py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-12">
-                        <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
-    <!-- End Footer -->
-    <!-- Start Script -->
-
-    <script src="/js/jquery-migrate-1.2.1.min.js"></script>
-
-    <script src="/js/templatemo.js"></script>
-    <script src="/js/custom.js"></script>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    <!-- End Script -->
+	<div class="container">
+		<main role="main" class="mt-5 pb-3 py-5 min-vh-100">
+			@RenderBody()
+		</main>
+	</div>
+	<!-- end features list section -->
+
+	<!-- end logo carousel -->
+	<!-- footer -->
+
+	<!-- end footer -->
+	<!-- copyright -->
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-6 text-right col-md-12">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end copyright -->
+	<!-- jquery -->
+	<script src="~/js/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap -->
+	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="/js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="/js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="/js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="/js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="/js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="/js/sticker.js"></script>
+	<!-- main js -->
+	<script src="/js/main.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-

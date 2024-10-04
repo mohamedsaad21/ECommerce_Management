@@ -20,3 +20,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.Thumbnail-picture, .product-picture {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.mybtn {
+    color:#fff !important;
+    background-color: #F28123;
+}

@@ -13,7 +13,7 @@ namespace ECommerce_Management_MVC.Models
         public string Shipping_Address  { get; set; }
         public string Order_Address { get; set; }
         public string Order_Email { get; set; }
-        public string Order_Date { get; set; }
+        public DateTime Order_Date { get; set; }
         public string Order_Status { get; set; }
 
         public virtual Customer customer { set; get; }

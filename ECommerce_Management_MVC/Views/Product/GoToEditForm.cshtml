@@ -1,0 +1,87 @@
+﻿@model ProductViewModel
+<form asp-action="SaveEditFormData">
+    <input asp-for="Id" type="hidden"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Sku">Sku</label>
+                    <input asp-for="Sku" class="form-control" placeholder="Sku">
+                    <span asp-validation-for="Sku" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price">Price</label>
+                    <input asp-for="Price" class="form-control" placeholder="Price">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Weight">Weight</label>
+                    <input asp-for="Weight" class="form-control" placeholder="Weight">
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descriptions">Description</label>
+                    <input asp-for="Descriptions" class="form-control" placeholder="Description">
+                    <span asp-validation-for="Descriptions" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CategoryId">Category</label>
+                    <input asp-for="CategoryId" class="form-control" placeholder="Category">
+                    <span asp-validation-for="Descriptions" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreateDate">CreateDate</label>
+                    <input asp-for="CreateDate" class="form-control" placeholder="CreateDate">
+                    <span asp-validation-for="CreateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Stock">Stock</label>
+                    <input asp-for="Stock" class="form-control" placeholder="Stock">
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+            <div class="col-md-6">
+
+                <div>
+                    <div class="input-group">
+                        <label class="custom-label">Thumbnail</label>
+                        <img id="thumbnail" src="~/img/woocommercer.png" alt="Thumbnail" class="Thumbnail-picture" />
+                    </div>
+                    <div class="custom-file mt-2">
+                        <input type="file"
+                               accept="image/*"
+                               asp-for="Thumbnail"
+                               class="custom-file-input"
+                               onchange="document.getElementById('thumbnail').src = window.URL.createObjectURL(this.files[0])" />
+                        <label class="custom-file-label" asp-for="Thumbnail">Choose picture...</label>
+                        <span asp-validation-for="Thumbnail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <label class="custom-label">Picture</label>
+                        <img id="picture" src="~/img/woocommercer.png" alt="Thumbnail" class="product-picture" />
+                    </div>
+                    <div class="custom-file mt-2">
+                        <input type="file"
+                               accept="image/*"
+                               asp-for="Thumbnail"
+                               class="custom-file-input"
+                               onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])" />
+                        <label class="custom-file-label" asp-for="Image">Choose picture...</label>
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

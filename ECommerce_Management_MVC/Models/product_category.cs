@@ -11,8 +11,8 @@ namespace ECommerce_Management_MVC.Models
         public int? category_id { get; set; }
         [ForeignKey("products")]
         public int? product_id { get; set; }
-        public virtual category categories { get; set; }
-        public virtual Product products { get; set; }
+        public virtual Category? categories { get; set; }
+        public virtual Product? products { get; set; }
 
     }
 }

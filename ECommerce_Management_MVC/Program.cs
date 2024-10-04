@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ECommerce_Management_MVC.Models;
+using ECommerce_Management_MVC.Repositories;
 namespace ECommerce_Management_MVC
 {
     public class Program
@@ -15,8 +16,14 @@ namespace ECommerce_Management_MVC
             builder.Services.AddIdentity<Customer, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<CommerceContext>().AddDefaultUI().AddDefaultTokenProviders();
 
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IEntityRepository<Product>, ProductRepository>();
+            builder.Services.AddScoped<IEntityRepository<Category>,  CategoryRepository>();
+            builder.Services.AddScoped<IEntityRepository<Order>,  OrderRepository>();
+            builder.Services.AddScoped<IEntityRepository<product_category>, Product_CategoriesRepository>();
 
             var app = builder.Build();
 
@@ -36,9 +43,6 @@ namespace ECommerce_Management_MVC
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-            app.Services.AddRole("Admin");
-            app.Services.AddRole("User");
-            app.Services.AddAdminRoles();
             app.Run();
         }
     }

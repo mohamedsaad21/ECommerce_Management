@@ -1,0 +1,59 @@
+﻿@model ECommerce_Management_MVC.ViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>OrderViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveEdit">
+            <input asp-for="Id" type="hidden"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="amount" class="control-label"></label>
+                <input asp-for="amount" class="form-control" />
+                <span asp-validation-for="amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Shipping_Address" class="control-label"></label>
+                <input asp-for="Shipping_Address" class="form-control" />
+                <span asp-validation-for="Shipping_Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order_Address" class="control-label"></label>
+                <input asp-for="Order_Address" class="form-control" />
+                <span asp-validation-for="Order_Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order_Email" class="control-label"></label>
+                <input asp-for="Order_Email" class="form-control" />
+                <span asp-validation-for="Order_Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order_Date" class="control-label"></label>
+                <input asp-for="Order_Date" class="form-control" />
+                <span asp-validation-for="Order_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order_Status" class="control-label"></label>
+                <input asp-for="Order_Status" class="form-control" />
+                <span asp-validation-for="Order_Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

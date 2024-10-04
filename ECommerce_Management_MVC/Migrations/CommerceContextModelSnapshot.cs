@@ -100,6 +100,31 @@ namespace ECommerce_Management_MVC.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("ECommerce_Management_MVC.Models.Category", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("thumbnail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("ECommerce_Management_MVC.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -115,9 +140,8 @@ namespace ECommerce_Management_MVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Order_Date")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Order_Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Order_Email")
                         .IsRequired()
@@ -182,9 +206,8 @@ namespace ECommerce_Management_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -193,9 +216,8 @@ namespace ECommerce_Management_MVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -205,15 +227,13 @@ namespace ECommerce_Management_MVC.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Sku")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<string>("Thumbnail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Thumbnail")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");
@@ -221,31 +241,6 @@ namespace ECommerce_Management_MVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("ECommerce_Management_MVC.Models.category", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("thumbnail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ECommerce_Management_MVC.Models.product_category", b =>
@@ -451,7 +446,7 @@ namespace ECommerce_Management_MVC.Migrations
 
             modelBuilder.Entity("ECommerce_Management_MVC.Models.product_category", b =>
                 {
-                    b.HasOne("ECommerce_Management_MVC.Models.category", "categories")
+                    b.HasOne("ECommerce_Management_MVC.Models.Category", "categories")
                         .WithMany("product_Categories")
                         .HasForeignKey("category_id");
 
@@ -515,6 +510,11 @@ namespace ECommerce_Management_MVC.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerce_Management_MVC.Models.Category", b =>
+                {
+                    b.Navigation("product_Categories");
+                });
+
             modelBuilder.Entity("ECommerce_Management_MVC.Models.Order", b =>
                 {
                     b.Navigation("orderDetails");
@@ -525,11 +525,6 @@ namespace ECommerce_Management_MVC.Migrations
                     b.Navigation("orderDetails");
 
                     b.Navigation("productCategories");
-                });
-
-            modelBuilder.Entity("ECommerce_Management_MVC.Models.category", b =>
-                {
-                    b.Navigation("product_Categories");
                 });
 
             modelBuilder.Entity("ECommerce_Management_MVC.Models.Customer", b =>
