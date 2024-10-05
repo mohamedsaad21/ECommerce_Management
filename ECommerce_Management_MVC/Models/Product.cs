@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce_Management_MVC.Models
 {
@@ -11,8 +12,8 @@ namespace ECommerce_Management_MVC.Models
         public decimal Price { get; set; }
         public float Weight { get; set; }
         public string Descriptions { get; set; }
-        public byte[]? Thumbnail { get; set; }
-        public byte[]? Image { get; set; }
+        public string? Thumbnail { get; set; }
+        public string? Image { get; set; }
         public int? CategoryId { get; set; }
         public DateTime CreateDate { get; set; }
         public int Stock { get; set; }

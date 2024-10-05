@@ -52,16 +52,16 @@
 
                 <div>
                     <div class="input-group">
-                        <label class="custom-label">Thumbnail</label>
+                        <label asp-for="Thumbnail" class="custom-label">Thumbnail</label>
                         <img id="thumbnail" src="~/img/woocommercer.png" alt="Thumbnail" class="Thumbnail-picture" />
                     </div>
                     <div class="custom-file mt-2">
-                        <input type="file"
+                        <input type="file" id="customFile"
                                accept="image/*"
                                asp-for="Thumbnail"
                                class="custom-file-input"
                                onchange="document.getElementById('thumbnail').src = window.URL.createObjectURL(this.files[0])" />
-                        <label class="custom-file-label" asp-for="Thumbnail">Choose picture...</label>
+                        <label class="custom-file-label" for="customFile">Choose picture...</label>
                         <span asp-validation-for="Thumbnail" class="text-danger"></span>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="custom-file mt-2">
                         <input type="file"
                                accept="image/*"
-                               asp-for="Thumbnail"
+                               asp-for="Image"
                                class="custom-file-input"
                                onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])" />
                         <label class="custom-file-label" asp-for="Image">Choose picture...</label>

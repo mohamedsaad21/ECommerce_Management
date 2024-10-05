@@ -3,6 +3,7 @@ using ECommerce_Management_MVC.Repositories;
 using ECommerce_Management_MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace ECommerce_Management_MVC.Controllers
 {
@@ -11,13 +12,15 @@ namespace ECommerce_Management_MVC.Controllers
         private readonly IEntityRepository<Product> _productsRepository;
         private readonly IEntityRepository<Category> _categorysRepository;
         private readonly IEntityRepository<product_category> _product_categoryRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public ProductController(IEntityRepository<Product> productsRepository, IEntityRepository<Category> categorysRepository, IEntityRepository<product_category> product_categoryRepository)
+        public ProductController(IEntityRepository<Product> productsRepository, IEntityRepository<Category> categorysRepository, IEntityRepository<product_category> product_categoryRepository, IWebHostEnvironment webHostEnvironment)
         {
             _productsRepository = productsRepository;
             _categorysRepository = categorysRepository;
             _product_categoryRepository = product_categoryRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -76,15 +79,19 @@ namespace ECommerce_Management_MVC.Controllers
                 };
                 if(ProductVM.Thumbnail != null)
                 {
-                    using var dataStream1 = new MemoryStream();
-                    await ProductVM.Thumbnail.CopyToAsync(dataStream1);
-                    product.Thumbnail = dataStream1.ToArray();
+                    string folder = "img/products/";
+                    folder += Guid.NewGuid().ToString() + ProductVM.Thumbnail.FileName;
+                    var serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    await ProductVM.Thumbnail.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    product.Thumbnail = folder;
                 }
-                if(ProductVM.Image != null)
+                if (ProductVM.Image != null)
                 {
-                    using var dataStream2 = new MemoryStream();
-                    await ProductVM.Image.CopyToAsync(dataStream2);
-                    product.Image = dataStream2.ToArray();
+                    string folder = "img/products/";
+                    folder += Guid.NewGuid().ToString() + ProductVM.Image.FileName;
+                    var serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    await ProductVM.Image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    product.Image = folder;
                 }
                 product = _productsRepository.Add(product);
                 _productsRepository.Save();
@@ -114,7 +121,9 @@ namespace ECommerce_Management_MVC.Controllers
                 Price = product.Price,
                 Weight = product.Weight,
                 Descriptions = product.Descriptions,
-                Stock = product.Stock
+                Stock = product.Stock,   
+                ThumbnailPath = product.Thumbnail,
+                ImagePath = product.Image
             };
             ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(ProductVM);
@@ -122,7 +131,7 @@ namespace ECommerce_Management_MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public IActionResult SaveEditFormData(ProductViewModel ProductVM)
+        public async Task<IActionResult> SaveEditFormData(ProductViewModel ProductVM)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +144,25 @@ namespace ECommerce_Management_MVC.Controllers
                 product.Weight = ProductVM.Weight;
                 product.Descriptions = ProductVM.Descriptions;
                 product.Stock = ProductVM.Stock;
+                if (ProductVM.Thumbnail != null)
+                {
+                    string folder = "img/products/";
+                    folder += Guid.NewGuid().ToString() + ProductVM.Thumbnail.FileName;
+                    var serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    await ProductVM.Thumbnail.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    if(product.Thumbnail != folder)
+                        product.Thumbnail = folder;
 
+                }
+                if (ProductVM.Image != null)
+                {
+                    string folder = "img/products/";
+                    folder += Guid.NewGuid().ToString() + ProductVM.Image.FileName;
+                    var serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    await ProductVM.Image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    if (product.Image != folder)
+                        product.Image = folder;
+                }
                 _productsRepository.Update(product);
                 _productsRepository.Save();
                 return RedirectToAction("GetAll");
@@ -149,6 +176,8 @@ namespace ECommerce_Management_MVC.Controllers
             var product = _productsRepository.GetById(id);
             if (product == null)
                 return NotFound();
+            System.IO.File.Delete(_webHostEnvironment.WebRootPath + "/" + product.Thumbnail);
+            System.IO.File.Delete(_webHostEnvironment.WebRootPath + "/" + product.Image);
             _productsRepository.Delete(product);
             _productsRepository.Save();
             return RedirectToAction("GetAll");

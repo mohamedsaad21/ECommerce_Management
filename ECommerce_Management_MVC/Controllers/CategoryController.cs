@@ -46,7 +46,7 @@ namespace ECommerce_Management_MVC.Controllers
                 {
                     name = CategoryVM.name,
                     description = CategoryVM.description,
-                    thumbnail = CategoryVM.thumbnail
+                    
                 };
 
                 _categoryRepository.Add(category);
@@ -66,7 +66,6 @@ namespace ECommerce_Management_MVC.Controllers
             var categoryVM = new CategoryViewModel();
             categoryVM.name = category.name;
             categoryVM.description = category.description;
-            categoryVM.thumbnail = category.thumbnail;
             return View(categoryVM);
         }
         [HttpPost]
@@ -82,7 +81,6 @@ namespace ECommerce_Management_MVC.Controllers
 
                 category.name = CategoryVM.name;
                 category.description = CategoryVM.description;
-                category.thumbnail = CategoryVM.thumbnail;
 
                 _categoryRepository.Update(category);
                 _categoryRepository.Save();

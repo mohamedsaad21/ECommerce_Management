@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_Management_MVC.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20241005142954_AddAdminUser")]
-    partial class AddAdminUser
+    [Migration("20241005195927_AssignRolesToAdminUser")]
+    partial class AssignRolesToAdminUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,7 +120,6 @@ namespace ECommerce_Management_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("thumbnail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -218,8 +217,8 @@ namespace ECommerce_Management_MVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -234,8 +233,8 @@ namespace ECommerce_Management_MVC.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Thumbnail")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");

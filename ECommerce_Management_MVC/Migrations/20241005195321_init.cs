@@ -64,7 +64,7 @@ namespace ECommerce_Management_MVC.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,8 +82,8 @@ namespace ECommerce_Management_MVC.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
                     Descriptions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Thumbnail = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false)
@@ -239,16 +239,14 @@ namespace ECommerce_Management_MVC.Migrations
                         name: "FK_Product_Categories_Categories_category_id",
                         column: x => x.category_id,
                         principalTable: "Categories",
-                        principalColumn: "id",
-                        onUpdate:ReferentialAction.Cascade,
-                        onDelete:ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_Product_Categories_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onUpdate: ReferentialAction.Cascade,
-                        onDelete: ReferentialAction.Cascade);
+                        onUpdate:ReferentialAction.Cascade,
+                        onDelete:ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,9 +268,7 @@ namespace ECommerce_Management_MVC.Migrations
                         name: "FK_OrderDetails_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id",
-                        onUpdate: ReferentialAction.Cascade,
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductId",
                         column: x => x.ProductId,

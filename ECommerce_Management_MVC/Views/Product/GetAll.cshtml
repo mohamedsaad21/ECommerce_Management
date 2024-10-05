@@ -1,5 +1,4 @@
-﻿
-@model List<Product>
+﻿@model List<Product>
 
 <div class="container mt-100">
     @if (User.IsInRole("Admin"))
@@ -14,7 +13,7 @@
                     <div class="product-image">
                         @if (product.Thumbnail != null)
                         {
-                            <a><img id="profilePicture" alt="Profile" src="data:image/*;base64,@Convert.ToBase64String(product.Thumbnail)" class="profile-picture" /></a>
+                            <a><img id="profilePicture" alt="Profile" src="~/@product.Thumbnail" /></a>
                         }
                         else
                         {
@@ -37,3 +36,5 @@
         }
     </div>
 </div>
+
+

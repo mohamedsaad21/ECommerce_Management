@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce_Management_MVC.Models
 {
@@ -8,7 +10,7 @@ namespace ECommerce_Management_MVC.Models
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public string thumbnail { get; set; }
+        public string? thumbnail { get; set; }
         public List<product_category> product_Categories { get; set; } 
     }
 }

@@ -16,6 +16,8 @@ namespace ECommerce_Management_MVC.ViewModels
         [Required]
         [MaxLength(250), MinLength(5)]
         public string Descriptions { get; set; }
+        public string? ThumbnailPath { get; set; }
+        public string? ImagePath { get; set; }
         public IFormFile? Thumbnail { get; set; }
         public IFormFile? Image { get; set; }
         public int? CategoryId { get; set; }

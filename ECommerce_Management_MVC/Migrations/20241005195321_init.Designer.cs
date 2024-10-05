@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_Management_MVC.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20241005130110_init")]
+    [Migration("20241005195321_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -120,7 +120,6 @@ namespace ECommerce_Management_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("thumbnail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -218,8 +217,8 @@ namespace ECommerce_Management_MVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -234,8 +233,8 @@ namespace ECommerce_Management_MVC.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Thumbnail")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");

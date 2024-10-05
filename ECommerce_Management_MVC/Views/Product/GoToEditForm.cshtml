@@ -2,7 +2,7 @@
 @{
     SelectList CategoryOptions = new SelectList(Model.categories, "id", "name");
 }
-<form asp-action="SaveEditFormData">
+<form asp-action="SaveEditFormData" enctype="multipart/form-data">
     <input asp-for="Id" type="hidden"/>
     <div class="container">
         <div class="row">
@@ -49,11 +49,17 @@
                 <button type="submit" class="btn btn-primary">Edit</button>
             </div>
             <div class="col-md-6">
-
                 <div>
                     <div class="input-group">
                         <label class="custom-label">Thumbnail</label>
-                        <img id="thumbnail" src="~/img/woocommercer.png" alt="Thumbnail" class="Thumbnail-picture" />
+                        @if(Model.ThumbnailPath != null)
+                        {
+                            <img id="thumbnail" src="~/@Model.ThumbnailPath" alt="Thumbnail" class="Thumbnail-picture" />
+                        }
+                        else
+                        {
+                            <img id="thumbnail" src="~/img/woocommercer.png" alt="Thumbnail" class="Thumbnail-picture" />
+                        }
                     </div>
                     <div class="custom-file mt-2">
                         <input type="file"
@@ -68,14 +74,21 @@
                 <div>
                     <div class="input-group">
                         <label class="custom-label">Picture</label>
-                        <img id="picture" src="~/img/woocommercer.png" alt="Thumbnail" class="product-picture" />
+                        @if (Model.ImagePath != null)
+                        {
+                            <img id="Image" src="~/@Model.ImagePath" alt="Image" class="product-picture" />
+                        }
+                        else
+                        {
+                            <img id="Image" src="~/img/woocommercer.png" alt="Image" class="product-picture" />
+                        }
                     </div>
                     <div class="custom-file mt-2">
                         <input type="file"
                                accept="image/*"
-                               asp-for="Thumbnail"
+                               asp-for="Image"
                                class="custom-file-input"
-                               onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])" />
+                               onchange="document.getElementById('Image').src = window.URL.createObjectURL(this.files[0])" />
                         <label class="custom-file-label" asp-for="Image">Choose picture...</label>
                         <span asp-validation-for="Image" class="text-danger"></span>
                     </div>

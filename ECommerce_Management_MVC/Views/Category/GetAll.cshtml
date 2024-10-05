@@ -20,12 +20,18 @@
                 <td>@item.thumbnail</td>
                 <td class="text-center">
                     <a asp-controller="Product" asp-action="GetByCategoryId" asp-route-id="@item.id" class="btn btn-warning btn-sm">Explore</a>
-                    <a asp-action="GoToEditForm" asp-route-id="@item.id" class="btn btn-warning btn-sm">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger btn-sm">Delete</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="GoToEditForm" asp-route-id="@item.id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger btn-sm">Delete</a>
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-action="GoToAddForm">Add Category</a>
+@if (User.IsInRole("Admin"))
+{
+        <a asp-action="GoToAddForm">Add Category</a>
+}
