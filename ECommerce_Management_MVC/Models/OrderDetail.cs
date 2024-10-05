@@ -12,7 +12,7 @@ namespace ECommerce_Management_MVC.Models
         [ForeignKey("Products")]
         public int? ProductId { get; set; }
         public decimal Price { get; set; }
-        public string Sku { get; set; }
+        public string? Sku { get; set; }
         public int Quantity { get; set; }
         public Product Products { get; set; }
         public virtual Order Order { get; set; }

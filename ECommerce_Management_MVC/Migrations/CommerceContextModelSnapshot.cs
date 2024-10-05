@@ -186,7 +186,6 @@ namespace ECommerce_Management_MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Sku")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

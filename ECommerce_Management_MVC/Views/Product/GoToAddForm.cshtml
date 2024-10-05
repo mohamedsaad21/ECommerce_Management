@@ -1,13 +1,12 @@
 ﻿@model ProductViewModel
+
+@{
+    SelectList CategoryOptions = new SelectList(Model.categories, "id", "name");
+}
 <form asp-action="SaveFormData" class="mt-100" enctype="multipart/form-data">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Sku">Sku</label>
-                    <input asp-for="Sku" class="form-control" placeholder="Sku">
-                    <span asp-validation-for="Sku" class="text-danger"></span>
-                </div>
                 <div class="form-group">
                     <label asp-for="Name">Name</label>
                     <input asp-for="Name" class="form-control" placeholder="Name">
@@ -33,12 +32,7 @@
 
                 <div class="form-group">
                     <label asp-for="CategoryId">Category</label>
-                    <select asp-for="CategoryId" class="form-control">
-                        @foreach(var item in Model.categories)
-                        {
-                            <option value="@item.id">@item.name</option>
-                        }
-                    </select>
+                    <select asp-for="CategoryId" class="form-control" asp-items="CategoryOptions">></select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
 
                 </div>

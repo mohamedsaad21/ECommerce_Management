@@ -64,7 +64,6 @@ namespace ECommerce_Management_MVC.Controllers
             {
                 var product = new Product
                 {
-                    Sku = ProductVM.Sku,
                     Name = ProductVM.Name,
                     Price = ProductVM.Price,
                     Weight = ProductVM.Weight,
@@ -87,7 +86,9 @@ namespace ECommerce_Management_MVC.Controllers
                 }
                 product = _productsRepository.Add(product);
                 _productsRepository.Save();
-                product_category pc = new product_category
+
+                //product_category Table
+                var pc = new product_category
                 {
                     category_id = product.CategoryId,
                     product_id = product.Id,
@@ -106,13 +107,13 @@ namespace ECommerce_Management_MVC.Controllers
                 return NotFound();
             var ProductVM = new ProductViewModel
             {
-                Sku = product.Sku,
                 Name = product.Name,
                 Price = product.Price,
                 Weight = product.Weight,
                 Descriptions = product.Descriptions,
                 Stock = product.Stock
             };
+            ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(ProductVM);
         }
         [HttpPost]
@@ -125,7 +126,6 @@ namespace ECommerce_Management_MVC.Controllers
                 if(product == null)
                     return NotFound();
 
-                product.Sku = ProductVM.Sku;
                 product.Name = ProductVM.Name;
                 product.Price = ProductVM.Price;
                 product.Weight = ProductVM.Weight;
@@ -136,6 +136,7 @@ namespace ECommerce_Management_MVC.Controllers
                 _productsRepository.Save();
                 return RedirectToAction("GetAll");
             }
+            ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(nameof(GoToEditForm), ProductVM);
         }
         public IActionResult Delete(int id)

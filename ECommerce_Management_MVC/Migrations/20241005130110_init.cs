@@ -239,12 +239,16 @@ namespace ECommerce_Management_MVC.Migrations
                         name: "FK_Product_Categories_Categories_category_id",
                         column: x => x.category_id,
                         principalTable: "Categories",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onUpdate:ReferentialAction.Cascade,
+                        onDelete:ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Product_Categories_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -256,7 +260,7 @@ namespace ECommerce_Management_MVC.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Sku = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sku = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -266,12 +270,16 @@ namespace ECommerce_Management_MVC.Migrations
                         name: "FK_OrderDetails_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

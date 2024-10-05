@@ -75,7 +75,6 @@ namespace ECommerce_Management_MVC.Controllers
                     ProductId = product.Id,
                     OrderId = order.Id,
                     Price = product.Price,
-                    Sku = product.Sku,
                     Quantity = product.Stock
                 };
                 _orderDetailRepository.Add(orderDetails);
