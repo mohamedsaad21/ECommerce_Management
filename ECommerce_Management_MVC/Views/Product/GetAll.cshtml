@@ -1,6 +1,11 @@
-﻿@model List<Product>
+﻿
+@model List<Product>
+
 <div class="container mt-100">
-<a class="mybtn btn" asp-action="GoToAddForm">Create New Product</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="mybtn btn" asp-action="GoToAddForm">Create New Product</a>
+    }
     <div class="row">
         @foreach (var product in Model)
         {
@@ -19,8 +24,14 @@
                     <h3>@product.Name</h3>
                     <p class="product-price"><span>Per Kg</span> 85$ </p>
                     <a asp-controller="Order" asp-action="Add" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    <a asp-action="GoToEditForm" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Edit</a>
-                    <a asp-action="Delete" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Delete</a>
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="GoToEditForm" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Edit</a>
+                        <a asp-action="Delete" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Delete</a>
+                    }
+
                 </div>
             </div>
         }

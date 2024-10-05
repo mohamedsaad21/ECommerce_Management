@@ -1,6 +1,7 @@
 ﻿using ECommerce_Management_MVC.Models;
 using ECommerce_Management_MVC.Repositories;
 using ECommerce_Management_MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol.Core.Types;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 
 namespace ECommerce_Management_MVC.Controllers
 {
+    [Authorize(Roles = "User")]
     public class OrderController : Controller
     {
         private readonly IEntityRepository<Order> _orderRepository;
@@ -34,6 +36,7 @@ namespace ECommerce_Management_MVC.Controllers
 				var orders = _orderRepository.GetAll().Where(c => c.Customer_Id == userId).ToList();
             return View(orders);
         }
+
         public IActionResult GetById(int id)
         {
             var order = _orderRepository.GetById(id);

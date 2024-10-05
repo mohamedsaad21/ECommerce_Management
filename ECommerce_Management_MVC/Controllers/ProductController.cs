@@ -1,6 +1,7 @@
 ﻿using ECommerce_Management_MVC.Models;
 using ECommerce_Management_MVC.Repositories;
 using ECommerce_Management_MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce_Management_MVC.Controllers
@@ -49,15 +50,16 @@ namespace ECommerce_Management_MVC.Controllers
             var products = _productsRepository.GetAll().Where(p => p.CategoryId == id).ToList();
             return View("GetAll", products);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult GoToAddForm()
         {
             ProductViewModel productViewModel = new ProductViewModel();
             productViewModel.categories = _categorysRepository.GetAll().ToList();
             return View(productViewModel);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SaveFormData(ProductViewModel ProductVM)
         {
             if (ModelState.IsValid)
@@ -100,6 +102,7 @@ namespace ECommerce_Management_MVC.Controllers
             ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(nameof(GoToAddForm), ProductVM);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult GoToEditForm(int id)
         {
             var product = _productsRepository.GetById(id);
@@ -118,6 +121,7 @@ namespace ECommerce_Management_MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult SaveEditFormData(ProductViewModel ProductVM)
         {
             if (ModelState.IsValid)
@@ -139,6 +143,7 @@ namespace ECommerce_Management_MVC.Controllers
             ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(nameof(GoToEditForm), ProductVM);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var product = _productsRepository.GetById(id);

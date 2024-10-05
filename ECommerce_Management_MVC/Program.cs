@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ECommerce_Management_MVC.Models;
 using ECommerce_Management_MVC.Repositories;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace ECommerce_Management_MVC
 {
     public class Program
