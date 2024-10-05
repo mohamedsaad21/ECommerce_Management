@@ -176,8 +176,29 @@ namespace ECommerce_Management_MVC.Controllers
             var product = _productsRepository.GetById(id);
             if (product == null)
                 return NotFound();
-            System.IO.File.Delete(_webHostEnvironment.WebRootPath + "/" + product.Thumbnail);
-            System.IO.File.Delete(_webHostEnvironment.WebRootPath + "/" + product.Image);
+            try
+            {
+                // Attempt to delete the Thumbnail
+                string thumbnailPath = Path.Combine(_webHostEnvironment.WebRootPath, product.Thumbnail);
+                if (System.IO.File.Exists(thumbnailPath))
+                {
+                    System.IO.File.Delete(thumbnailPath);
+                }
+
+                // Attempt to delete the Image
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.Image);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+            catch (IOException ex)
+            {
+                // Log the exception if necessary
+                // Provide feedback or handle gracefully
+                Console.WriteLine("Error deleting file: " + ex.Message);
+                // Optionally return a message to the user or ignore this issue
+            }
             _productsRepository.Delete(product);
             _productsRepository.Save();
             return RedirectToAction("GetAll");
