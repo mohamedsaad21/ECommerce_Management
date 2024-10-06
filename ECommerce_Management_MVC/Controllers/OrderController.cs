@@ -160,9 +160,7 @@ namespace ECommerce_Management_MVC.Controllers
             orderViewModel.Shipping_Address = order.Shipping_Address;
             orderViewModel.Order_Address = order.Order_Address;
             orderViewModel.Order_Email = order.Order_Email;
-            order.Order_Status = order.Order_Status;
-
-
+            orderViewModel.Order_Status = order.Order_Status;
 			return View(orderViewModel);
 		}
         [HttpPost]
@@ -204,9 +202,10 @@ namespace ECommerce_Management_MVC.Controllers
             _orderRepository.Save();
             return RedirectToAction(nameof(GetAll));
         }
-        public IActionResult CheckPositive(int amount)
+        public IActionResult CheckValidStock(int amount, string productId)
         {
-            return amount >= 0 ? Json(true) : Json(false);
+            var product = _productRepository.GetById(int.Parse(productId));
+            return amount >= 0 && amount <= product.Stock? Json(true) : Json(false);
         }
     }
 }
