@@ -151,7 +151,8 @@ namespace ECommerce_Management_MVC.Controllers
                 Descriptions = product.Descriptions,
                 Stock = product.Stock,   
                 ThumbnailPath = product.Thumbnail,
-                ImagePath = product.Image
+                ImagePath = product.Image,
+                CategoryId = product.CategoryId
             };
             ProductVM.categories = _categorysRepository.GetAll().ToList();
             return View(ProductVM);
@@ -172,6 +173,7 @@ namespace ECommerce_Management_MVC.Controllers
                 product.Weight = ProductVM.Weight;
                 product.Descriptions = ProductVM.Descriptions;
                 product.Stock = ProductVM.Stock;
+                product.CategoryId = ProductVM.CategoryId;
                 if (ProductVM.Thumbnail != null)
                 {
                     string folder = "img/products/";
