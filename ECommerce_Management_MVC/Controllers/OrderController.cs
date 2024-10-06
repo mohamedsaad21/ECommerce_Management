@@ -4,8 +4,10 @@ using ECommerce_Management_MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using System.Security.Claims;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace ECommerce_Management_MVC.Controllers
 {
@@ -31,19 +33,71 @@ namespace ECommerce_Management_MVC.Controllers
         }
         public async Task<IActionResult> GetAll()
         {
-            List<Order> orders = new List<Order>();
-            if (User.IsInRole("Admin"))
+			List<OrderViewModel> result = new List<OrderViewModel>();
+			if (User.IsInRole("Admin"))
             {
-				orders = _orderRepository.GetAll().ToList();
-			}
+                result = (from order in _orderRepository.GetAll()
+                              join orderDetail in _orderDetailRepository.GetAll() on order.Id equals orderDetail.OrderId
+                              join product in _productRepository.GetAll() on orderDetail.ProductId equals product.Id
+                              select new OrderViewModel
+                              {
+                                  Id = order.Id,
+                                  amount = order.amount,
+                                  Shipping_Address = order.Shipping_Address,
+                                  Order_Address = order.Order_Address,
+                                  Order_Email = order.Order_Email,
+                                  Order_Date = order.Order_Date,
+                                  Order_Status = order.Order_Status,
+                                  productName = product.Name,
+                              }).ToList();
+            }
             else
             {
 				var user = await _userManager.GetUserAsync(User);
 				var userId = user?.Id;
-				orders = _orderRepository.GetAll().Where(c => c.Customer_Id == userId).ToList();				
+				result = (from order in _orderRepository.GetAll()
+						  join orderDetail in _orderDetailRepository.GetAll() on order.Id equals orderDetail.OrderId
+						  join product in _productRepository.GetAll() on orderDetail.ProductId equals product.Id
+						  select new OrderViewModel
+						  {
+							  Id = order.Id,
+							  amount = order.amount,
+							  Shipping_Address = order.Shipping_Address,
+							  Order_Address = order.Order_Address,
+							  Order_Email = order.Order_Email,
+							  Order_Date = order.Order_Date,
+							  Order_Status = order.Order_Status,
+							  productName = product.Name,
+                              CustomerId = order.customer.Id,
+						  }).Where(c => c.CustomerId == userId).ToList();
 			}
-            return View(orders);
-        }
+
+			return View(result);
+			//List<OrderViewModel> orders = new List<OrderViewModel>();
+			//if (User.IsInRole("Admin"))
+			//{
+			//    orders = _orderRepository.GetAll().Select(O => new OrderViewModel
+			//    {
+			//        Id = O.Id,
+			//        amount = O.amount,
+			//        Shipping_Address = O.Shipping_Address,
+			//        Order_Address = O.Order_Address,
+			//        Order_Email = O.Order_Email,
+			//        Order_Date = O.Order_Date,
+			//        Order_Status = O.Order_Status
+			//    }).ToList();
+			//    var orderDetails = _orderDetailRepository.GetAll().Where(OD => OD.Products.Id == orders);
+			//    if (orderDetails == null)
+			//        return NotFound();
+			//}
+			//else
+			//{
+			//    var user = await _userManager.GetUserAsync(User);
+			//    var userId = user?.Id;
+			//    orders = _orderRepository.GetAll().Where(c => c.Customer_Id == userId).ToList();
+			//}
+			//return View(orders);
+		}
 
         public IActionResult GetById(int id)
         {

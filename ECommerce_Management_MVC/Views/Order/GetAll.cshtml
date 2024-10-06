@@ -1,4 +1,4 @@
-﻿@model List<Order>
+﻿@model List<OrderViewModel>
 
 @{
     ViewData["Title"] = "GetAll";
@@ -8,8 +8,9 @@
 
 
 <table class="table table-hover table-striped">
-    <thead>
+    <thead class="bg-dark text-white">
         <tr>
+            <th>Product</th>
             <th>Amount</th>
             <th>Shipping_Address</th>
             <th>Order_Address</th>
@@ -22,6 +23,7 @@
     <tbody>
     @foreach (var item in Model) {
         <tr>
+            <td>@item.productName</td>
             <td>@item.amount</td>
             <td>@item.Shipping_Address</td>
             <td>@item.Order_Address</td>

@@ -1,5 +1,7 @@
 ﻿using ECommerce_Management_MVC.Models;
+using ECommerce_Management_MVC.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace ECommerce_Management_MVC.Repositories
@@ -13,11 +15,11 @@ namespace ECommerce_Management_MVC.Repositories
         {
             _commerceContext = commerceContext;
             _userManager = userManager;
-        }
+		}
 
         public IEnumerable<Order> GetAll()
         {
-			return _commerceContext.Orders;
+			return _commerceContext.Orders.Include(o => o.customer);
 		}
 
         public Order GetById(int id)

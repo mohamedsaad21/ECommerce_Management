@@ -9,7 +9,7 @@ namespace ECommerce_Management_MVC.ViewModels
     {
         public int Id { get; set; }
         public int productId { get; set; }
-
+        public string? productName { get; set; } 
         [Required]
         [Remote("CheckPositive", "Order", ErrorMessage = "Amount must be positive")]
         public int amount { get; set; }
@@ -19,7 +19,7 @@ namespace ECommerce_Management_MVC.ViewModels
         public string Order_Email { get; set; }
         public DateTime Order_Date { get; set; }
         public string Order_Status { get; set; }
-
+        public string? CustomerId { get; set; }
         public virtual Customer? customer { set; get; }
         public virtual List<OrderDetail>? orderDetails { get; set; }
     }
