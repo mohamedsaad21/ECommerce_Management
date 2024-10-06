@@ -48,6 +48,7 @@ namespace ECommerce_Management_MVC.Controllers
                                   Order_Email = order.Order_Email,
                                   Order_Date = order.Order_Date,
                                   Order_Status = order.Order_Status,
+
                                   productName = product.Name,
                               }).ToList();
             }
@@ -153,15 +154,16 @@ namespace ECommerce_Management_MVC.Controllers
 
         public IActionResult Edit(int id)
         {
-            var order = _orderRepository.GetById(id);
-            if (order == null) return NotFound();
+            var ordery = _orderRepository.GetById(id);
+            if (ordery == null) return NotFound();
 			OrderViewModel orderViewModel = new OrderViewModel();
-            orderViewModel.amount = order.amount;
-            orderViewModel.Shipping_Address = order.Shipping_Address;
-            orderViewModel.Order_Address = order.Order_Address;
-            orderViewModel.Order_Email = order.Order_Email;
-            orderViewModel.Order_Status = order.Order_Status;
-			return View(orderViewModel);
+            orderViewModel.amount = ordery.amount;
+            orderViewModel.Shipping_Address = ordery.Shipping_Address;
+            orderViewModel.Order_Address = ordery.Order_Address;
+            orderViewModel.Order_Email = ordery.Order_Email;
+            orderViewModel.Order_Status = ordery.Order_Status;
+
+            return View(orderViewModel);
 		}
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -202,10 +204,9 @@ namespace ECommerce_Management_MVC.Controllers
             _orderRepository.Save();
             return RedirectToAction(nameof(GetAll));
         }
-        public IActionResult CheckValidStock(int amount, string productId)
+        public IActionResult CheckValidStock(int amount)
         {
-            var product = _productRepository.GetById(int.Parse(productId));
-            return amount >= 0 && amount <= product.Stock? Json(true) : Json(false);
+            return amount >= 0? Json(true) : Json(false);
         }
     }
 }

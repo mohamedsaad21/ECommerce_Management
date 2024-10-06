@@ -11,7 +11,7 @@ namespace ECommerce_Management_MVC.ViewModels
         public int productId { get; set; }
         public string? productName { get; set; } 
         [Required]
-        [Remote("CheckValidStock", "Order", AdditionalFields = "productId", ErrorMessage = "Stock is Invalid!!")]
+        [Remote("CheckValidStock", "Order", AdditionalFields = "productId", ErrorMessage = "Stock must be positive!!")]
         public int amount { get; set; }
         public string Shipping_Address { get; set; }
         public string Order_Address { get; set; }
