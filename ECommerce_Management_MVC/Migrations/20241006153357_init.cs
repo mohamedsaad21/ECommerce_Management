@@ -220,7 +220,10 @@ namespace ECommerce_Management_MVC.Migrations
                         name: "FK_Orders_AspNetUsers_Customer_Id",
                         column: x => x.Customer_Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
+
                 });
 
             migrationBuilder.CreateTable(
@@ -245,8 +248,8 @@ namespace ECommerce_Management_MVC.Migrations
                         column: x => x.product_id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onUpdate:ReferentialAction.Cascade,
-                        onDelete:ReferentialAction.Cascade);
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

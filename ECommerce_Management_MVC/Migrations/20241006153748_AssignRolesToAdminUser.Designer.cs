@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_Management_MVC.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20241005195927_AssignRolesToAdminUser")]
+    [Migration("20241006153748_AssignRolesToAdminUser")]
     partial class AssignRolesToAdminUser
     {
         /// <inheritdoc />

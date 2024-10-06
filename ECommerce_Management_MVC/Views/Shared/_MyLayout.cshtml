@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- title -->
-	<title>QuickCart</title>
+	<title>Epsilon</title>
 
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+	<link rel="shortcut icon" type="image/png" href="/img/enlargement.png">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -42,98 +42,65 @@
 	</div>
 	<!--PreLoader Ends-->
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
-					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
+	<div class="top-header-area" id="sticker" style="background-color: #051922">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container">
+				<!-- Brand -->
+				<a class="navbar-brand" asp-controller="Home" asp-action="Index"><h1 class="mytitle" style="color: #F28123;">Epsilon</h1></a>
 
-							</a>
-						</div>
-						<!-- logo -->
-						<!-- menu start -->
-						<nav class="main-menu">
-							<ul>
-								<li class="current-list-item">
-									<a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.html">Static Home</a></li>
-										<li><a href="index_2.html">Slider Home</a></li>
-									</ul>
-								</li>
-								<li><a href="about.html">About</a></li>
-								<li class="nav-item">
-									<a class="nav-link" asp-controller="Product" asp-action="GetAll">Product</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" asp-controller="Category" asp-action="GetAll">Category</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" asp-controller="Order" asp-action="GetAll">Order</a>
-								</li>
-								<partial name="_LoginPartial" />
-								<li>
-									<a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="404.html">404 page</a></li>
-										<li><a href="about.html">About</a></li>
-										
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="checkout.html">Check Out</a></li>
-										<li><a href="contact.html">Contact</a></li>
-										<li><a href="news.html">News</a></li>
-										<li><a href="shop.html">Shop</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="news.html">News</a>
-									<ul class="sub-menu">
-										<li><a href="news.html">News</a></li>
-										<li><a href="single-news.html">Single News</a></li>
-									</ul>
-								</li>
-								<li><a href="contact.html">Contact</a></li>
-								<li>
-									<a href="shop.html">Shop</a>
-									<ul class="sub-menu">
-										<li><a href="shop.html">Shop</a></li>
-										<li><a href="checkout.html">Check Out</a></li>
-										<li><a href="single-product.html">Single Product</a></li>
-										<li><a href="cart.html">Cart</a></li>
-									</ul>
-								</li>
-								
-							</ul>
-						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
-						<!-- menu end -->
-					</div>
+				<!-- Toggler/collapsible Button -->
+				<button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- Navbar links -->
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a class="nav-link active" style="color: #F28123; font-weight: bold;" asp-controller="Home" asp-action="Index">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" style="color: #F28123; font-weight: bold;" asp-controller="Product" asp-action="GetAll">Product</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" style="color: #F28123; font-weight: bold;" asp-controller="Category" asp-action="GetAll">Category</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" style="color: #F28123; font-weight: bold;" asp-controller="Order" asp-action="GetAll">Order</a>
+						</li>
+						<!-- Include partial login if needed -->
+						<partial name="_LoginPartial" />
+					</ul>
 				</div>
 			</div>
-		</div>
+		</nav>
+		<!-- Mobile Menu -->
+		<div class="mobile-menu" style="background-color: #F28123;"></div>
 	</div>
+
+	<!-- Custom CSS for the toggle button -->
+	<style>
+		/* Customizing the toggle button */
+		.custom-toggler.navbar-toggler {
+			border-color: #F28123;
+		}
+
+		.custom-toggler .navbar-toggler-icon {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(242, 129, 35, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+		}
+
+		/* Changing color of the toggle bars */
+		.navbar-toggler-icon {
+			background-color: #051922;
+		}
+
+		/* Styling the nav-link items to be bold */
+		.nav-link {
+			font-weight: bold;
+		}
+	</style>
+
 	<!-- end header -->
-	<!-- search area -->
-	<div class="search-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<span class="close-btn"><i class="fas fa-window-close"></i></span>
-					<div class="search-bar">
-						<div class="search-bar-tablecell">
-							<h3>Search For:</h3>
-							<input type="text" placeholder="Keywords">
-							<button type="submit">Search <i class="fas fa-search"></i></button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 

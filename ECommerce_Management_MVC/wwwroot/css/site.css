@@ -30,3 +30,50 @@ body {
     color:#fff !important;
     background-color: #F28123;
 }
+.nav-link {
+    color: #F28123 !important;
+}
+
+
+
+/* Styling the category card */
+.category-card {
+    background-color: #051922;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+    .category-card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Styling the card image */
+    .category-card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+/* Styling the button */
+.category-btn {
+    background-color: #F28123;
+    color: #051922;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+    .category-btn:hover {
+        background-color: #ff9140;
+        color: #fff;
+    }
+
+/* Additional styling for responsiveness */
+.category-card .card-title {
+    margin-top: 10px;
+}

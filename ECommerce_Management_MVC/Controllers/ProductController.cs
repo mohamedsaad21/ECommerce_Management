@@ -28,10 +28,27 @@ namespace ECommerce_Management_MVC.Controllers
             return View();
         }
 
-        public IActionResult GetAll()
+        public IActionResult GetAll(string searchString = "", int currentPage = 1, string term = "")
         {
-            List<Product> products = _productsRepository.GetAll().ToList();
-            return View(products);
+            term = string.IsNullOrEmpty(term) ? "" : term.ToLower();
+            var Products = _productsRepository.GetAll().ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Products = Products.Where(e => e.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            var productData = new ProductViewModel();
+            var totalRecords = Products.Count();
+            int PageSize = 4;
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)PageSize);
+            Products = Products.Skip((currentPage - 1) * PageSize).Take(PageSize).ToList();
+            productData.CurrentPage = currentPage;
+            productData.TotalPages = totalPages;
+            productData.PageSize = PageSize;
+            productData.Term = term;
+            productData.Products = Products;
+            return View(productData);
+            //List<Product> products = _productsRepository.GetAll().ToList();
+            //return View(products);
         }
 
         public IActionResult GetById(int id)
@@ -44,14 +61,25 @@ namespace ECommerce_Management_MVC.Controllers
             return View(product);
         }
 
-        public IActionResult GetByCategoryId(int id)
+        public IActionResult GetByCategoryId(int id, int currentPage = 1, string term = "")
         {
             var category = _categorysRepository.GetById(id);
-            if(category == null)
+            if (category == null)
                 return NotFound();
+            term = string.IsNullOrEmpty(term) ? "" : term.ToLower();
+            var Products = _productsRepository.GetAll().Where(p => p.CategoryId == id).ToList();
+            var productData = new ProductViewModel();
 
-            var products = _productsRepository.GetAll().Where(p => p.CategoryId == id).ToList();
-            return View("GetAll", products);
+            var totalRecords = Products.Count();
+            int PageSize = 4;
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)PageSize);
+            Products = Products.Skip((currentPage - 1) * PageSize).Take(PageSize).ToList();
+            productData.CurrentPage = currentPage;
+            productData.TotalPages = totalPages;
+            productData.PageSize = PageSize;
+            productData.Term = term;
+            productData.Products = Products;
+            return View("GetAll", productData);
         }
         [Authorize(Roles = "Admin")]
         public IActionResult GoToAddForm()
@@ -176,32 +204,40 @@ namespace ECommerce_Management_MVC.Controllers
             var product = _productsRepository.GetById(id);
             if (product == null)
                 return NotFound();
-            try
+            if(product.Thumbnail != null && product.Image  != null)
             {
-                // Attempt to delete the Thumbnail
-                string thumbnailPath = Path.Combine(_webHostEnvironment.WebRootPath, product.Thumbnail);
-                if (System.IO.File.Exists(thumbnailPath))
+                try
                 {
-                    System.IO.File.Delete(thumbnailPath);
-                }
+                    // Attempt to delete the Thumbnail
+                    string thumbnailPath = Path.Combine(_webHostEnvironment.WebRootPath, product.Thumbnail);
+                    if (System.IO.File.Exists(thumbnailPath))
+                    {
+                        System.IO.File.Delete(thumbnailPath);
+                    }
 
-                // Attempt to delete the Image
-                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.Image);
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
+                    // Attempt to delete the Image
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.Image);
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
                 }
-            }
-            catch (IOException ex)
-            {
-                // Log the exception if necessary
-                // Provide feedback or handle gracefully
-                Console.WriteLine("Error deleting file: " + ex.Message);
-                // Optionally return a message to the user or ignore this issue
+                catch (IOException ex)
+                {
+                    // Log the exception if necessary
+                    // Provide feedback or handle gracefully
+                    Console.WriteLine("Error deleting file: " + ex.Message);
+                    // Optionally return a message to the user or ignore this issue
+                }
             }
             _productsRepository.Delete(product);
             _productsRepository.Save();
             return RedirectToAction("GetAll");
+        }
+
+        public IActionResult CheckPositive(int stock)
+        {
+            return stock >= 0? Json(true) : Json(false);
         }
     }
 }

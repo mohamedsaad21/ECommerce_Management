@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_Management_MVC.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20241005195321_init")]
-    partial class init
+    [Migration("20241006153620_AddAdminUser")]
+    partial class AddAdminUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

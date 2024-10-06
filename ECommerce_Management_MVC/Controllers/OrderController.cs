@@ -31,9 +31,17 @@ namespace ECommerce_Management_MVC.Controllers
         }
         public async Task<IActionResult> GetAll()
         {
-			var user = await _userManager.GetUserAsync(User);
-			var userId = user?.Id; 
-				var orders = _orderRepository.GetAll().Where(c => c.Customer_Id == userId).ToList();
+            List<Order> orders = new List<Order>();
+            if (User.IsInRole("Admin"))
+            {
+				orders = _orderRepository.GetAll().ToList();
+			}
+            else
+            {
+				var user = await _userManager.GetUserAsync(User);
+				var userId = user?.Id;
+				orders = _orderRepository.GetAll().Where(c => c.Customer_Id == userId).ToList();				
+			}
             return View(orders);
         }
 
@@ -48,6 +56,7 @@ namespace ECommerce_Management_MVC.Controllers
         {
             OrderViewModel orderViewModel = new OrderViewModel();
             orderViewModel.productId = id;
+            
             return View(orderViewModel);
         }
         [HttpPost]
@@ -78,8 +87,9 @@ namespace ECommerce_Management_MVC.Controllers
                     ProductId = product.Id,
                     OrderId = order.Id,
                     Price = product.Price,
-                    Quantity = product.Stock
+                    Quantity = OrderVM.amount
                 };
+                product.Stock -= orderDetails.Quantity;
                 _orderDetailRepository.Add(orderDetails);
                 _orderDetailRepository.Save();
 				return RedirectToAction(nameof(GetAll));
@@ -94,8 +104,10 @@ namespace ECommerce_Management_MVC.Controllers
 			OrderViewModel orderViewModel = new OrderViewModel();
             orderViewModel.amount = order.amount;
             orderViewModel.Shipping_Address = order.Shipping_Address;
+            orderViewModel.Order_Address = order.Order_Address;
             orderViewModel.Order_Email = order.Order_Email;
             order.Order_Status = order.Order_Status;
+
 
 			return View(orderViewModel);
 		}
@@ -118,6 +130,8 @@ namespace ECommerce_Management_MVC.Controllers
 				
 				_orderRepository.Update(order);
 				_orderRepository.Save();
+
+
 				return RedirectToAction(nameof(GetAll));
 			}
             return View(nameof(Edit), OrderVM);
@@ -127,9 +141,18 @@ namespace ECommerce_Management_MVC.Controllers
             var order = _orderRepository.GetById(id);
             if (order == null)
                 return NotFound();
+            var orderDetails = _orderDetailRepository.GetAll().FirstOrDefault(OD => OD.OrderId == order.Id);
+            if(orderDetails == null)
+                return NotFound();
+            _orderDetailRepository.Delete(orderDetails);
+            _orderDetailRepository.Save();
             _orderRepository.Delete(order);
             _orderRepository.Save();
             return RedirectToAction(nameof(GetAll));
+        }
+        public IActionResult CheckPositive(int amount)
+        {
+            return amount >= 0 ? Json(true) : Json(false);
         }
     }
 }

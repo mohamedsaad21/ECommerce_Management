@@ -1,6 +1,7 @@
 ﻿using ECommerce_Management_MVC.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce_Management_MVC.ViewModels
 {
@@ -8,6 +9,9 @@ namespace ECommerce_Management_MVC.ViewModels
     {
         public int Id { get; set; }
         public int productId { get; set; }
+
+        [Required]
+        [Remote("CheckPositive", "Order", ErrorMessage = "Amount must be positive")]
         public int amount { get; set; }
         public string Shipping_Address { get; set; }
         public string Order_Address { get; set; }

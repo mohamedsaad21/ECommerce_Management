@@ -46,12 +46,12 @@
                     <input asp-for="Stock" class="form-control" placeholder="Stock">
                     <span asp-validation-for="Stock" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn mybtn">Edit</button>
             </div>
             <div class="col-md-6">
                 <div>
                     <div class="input-group">
-                        <label class="custom-label">Thumbnail</label>
+                        <label class="custom-label mb-3">Thumbnail</label>
                         @if(Model.ThumbnailPath != null)
                         {
                             <img id="thumbnail" src="~/@Model.ThumbnailPath" alt="Thumbnail" class="Thumbnail-picture" />

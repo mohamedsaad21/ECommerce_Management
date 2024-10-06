@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_Management_MVC.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20241005195549_SeedRoles")]
-    partial class SeedRoles
+    [Migration("20241006153357_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
