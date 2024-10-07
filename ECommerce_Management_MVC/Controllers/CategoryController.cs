@@ -9,11 +9,13 @@ namespace ECommerce_Management_MVC.Controllers
     public class CategoryController : Controller
     {
         private readonly IEntityRepository<Category> _categoryRepository;
+        private readonly IEntityRepository<Product> _productRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CategoryController(IEntityRepository<Category> categoryRepository, IWebHostEnvironment webHostEnvironment)
+        public CategoryController(IEntityRepository<Category> categoryRepository, IEntityRepository<Product> productRepository, IWebHostEnvironment webHostEnvironment)
         {
             _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -124,6 +126,12 @@ namespace ECommerce_Management_MVC.Controllers
         public IActionResult Delete(int id)
         {
             var category = _categoryRepository.GetById(id);
+            if (category == null) return NotFound();
+            var products = _productRepository.GetAll().Where(p => p.CategoryId == id);
+            foreach(var product in products)
+            {
+                _productRepository.Delete(product);
+            }
             _categoryRepository.Delete(category);
             _categoryRepository.Save();
             return RedirectToAction("GetAll");

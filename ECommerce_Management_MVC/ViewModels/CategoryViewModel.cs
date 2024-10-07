@@ -7,7 +7,7 @@ namespace ECommerce_Management_MVC.ViewModels
     {
         public int Id { get; set; }
         public string name { get; set; }
-        [Required, MaxLength(255), MinLength(20)]
+        [Required, MaxLength(255, ErrorMessage = "Length must be at most 255 characters"), MinLength(20, ErrorMessage = "Length must be at least 20 characters")]
         public string description { get; set; }
         public string? thumbnail { get; set; }
         public IFormFile? Thumbnail { get; set; }
