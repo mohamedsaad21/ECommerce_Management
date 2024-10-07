@@ -26,30 +26,45 @@
         @foreach (var product in Model.Products)
         {
             <div class="col-lg-3 col-md-3 text-center">
-                <div class="single-product-item">
-                    <div class="product-image">
+                <div class="single-product-item" style="height: 490px; display: flex; flex-direction: column; justify-content: space-between;max-width:250px">
+                    <div class="product-image" style="height: 200px; display: flex; justify-content: center; align-items: center;">
                         @if (product.Thumbnail != null)
                         {
-                            <a><img id="profilePicture" alt="Profile" src="~/@product.Thumbnail" /></a>
+                            <a><img id="profilePicture" alt="Profile" src="~/@product.Thumbnail" style="width: 150px; height: 150px; object-fit: cover;" /></a>
                         }
                         else
                         {
-                            <a><img id="picture" src="~/img/woocommercer.png" alt="Thumbnail" class="product-picture" /></a>
+                            <a><img id="picture" src="~/img/woocommercer.png" alt="Thumbnail" class="product-picture" style="width: 150px; height: 150px; object-fit: cover;" /></a>
                         }
                     </div>
                     <h3>@product.Name</h3>
-                    <p class="product-price"> @product.Price&#163; </p>
-                    <a asp-controller="Order" asp-action="Add" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    <p class="product-price">@product.Price&#163;</p>
 
+                    <!-- Center buttons -->
+                    <div style="margin-top: auto;">
+                        <a asp-controller="Order" asp-action="Add" asp-route-id="@product.Id" class="cart-btn" style="padding: 5px 10px; font-size: 18px; width: 170px; display: inline-block;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </a>
 
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a asp-action="GoToEditForm" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Edit</a>
-                        <a asp-action="Delete" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Delete</a>
-                    }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="mt-3">
+                                <a asp-action="GoToEditForm" asp-route-id="@product.Id" class="cart-btn mt-2" style="padding: 5px 10px; font-size: 12px; width: 80px; display: inline-block;">
 
+                                    Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@product.Id" class="cart-btn mt-2" style="padding: 5px 10px; font-size: 12px; width: 80px; display: inline-block;">
+                                    Delete
+                                </a>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
+
+
+
+
         }
     </div>
 </div>
@@ -63,7 +78,7 @@
                     <li class="page-item">
                         <a class="page-link" href="/Product/GetAll?term=@Model.Term&currentPage=@(Model.CurrentPage-1)" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
+                            <span>Previous</span>
                         </a>
                     </li>
                 }
@@ -71,11 +86,11 @@
                 {
                     if (i == Model.CurrentPage)
                     {
-                        <li class="page-item"><a class="page-link active" href="/Product/GetAll?term=@Model.Term&currentPage=@Model.CurrentPage">@i</a></li>
+                        <li class="page-item active"><a class="page-link" href="/Product/GetAll?term=@Model.Term&currentPage=@i">@i</a></li>
                     }
                     else
                     {
-                        <li class="page-item"><a class="page-link" href="/Product/GetAll?term=@Model.Term&currentPage=@Model.CurrentPage">@i</a></li>
+                        <li class="page-item"><a class="page-link" href="/Product/GetAll?term=@Model.Term&currentPage=@i">@i</a></li>
                     }
                 }
                 @if (Model.CurrentPage < Model.TotalPages)
@@ -83,7 +98,7 @@
                     <li class="page-item">
                         <a class="page-link" href="/Product/GetAll?term=@Model.Term&currentPage=@(Model.CurrentPage+1)" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
+                            <span>Next</span>
                         </a>
                     </li>
                 }
@@ -91,4 +106,3 @@
         </nav>
     </div>
 </div>
-

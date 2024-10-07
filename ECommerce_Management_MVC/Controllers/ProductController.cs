@@ -41,14 +41,12 @@ namespace ECommerce_Management_MVC.Controllers
             int PageSize = 4;
             var totalPages = (int)Math.Ceiling(totalRecords / (double)PageSize);
             Products = Products.Skip((currentPage - 1) * PageSize).Take(PageSize).ToList();
+            productData.Products = Products;
             productData.CurrentPage = currentPage;
             productData.TotalPages = totalPages;
-            productData.PageSize = PageSize;
             productData.Term = term;
-            productData.Products = Products;
+            productData.PageSize = PageSize;
             return View(productData);
-            //List<Product> products = _productsRepository.GetAll().ToList();
-            //return View(products);
         }
 
         public IActionResult GetById(int id)

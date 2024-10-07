@@ -42,7 +42,7 @@
 	</div>
 	<!--PreLoader Ends-->
 	<!-- header -->
-	<div class="top-header-area" id="sticker" style="background-color: #051922">
+	<div style="background-color: #051922;">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<!-- Brand -->
@@ -57,16 +57,16 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item">
-							<a class="nav-link active" style="color: #F28123; font-weight: bold;" asp-controller="Home" asp-action="Index">Home</a>
+							<a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" style="color: #F28123; font-weight: bold;" asp-controller="Product" asp-action="GetAll">Product</a>
+							<a class="nav-link" asp-controller="Product" asp-action="GetAll">Product</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" style="color: #F28123; font-weight: bold;" asp-controller="Category" asp-action="GetAll">Category</a>
+							<a class="nav-link" asp-controller="Category" asp-action="GetAll">Category</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" style="color: #F28123; font-weight: bold;" asp-controller="Order" asp-action="GetAll">Order</a>
+							<a class="nav-link" asp-controller="Order" asp-action="GetAll">Order</a>
 						</li>
 						<!-- Include partial login if needed -->
 						<partial name="_LoginPartial" />
@@ -78,7 +78,7 @@
 		<div class="mobile-menu" style="background-color: #F28123;"></div>
 	</div>
 
-	<!-- Custom CSS for the toggle button -->
+	<!-- Custom CSS for the navbar -->
 	<style>
 		/* Customizing the toggle button */
 		.custom-toggler.navbar-toggler {
@@ -94,11 +94,24 @@
 			background-color: #051922;
 		}
 
-		/* Styling the nav-link items to be bold */
+		/* Styling the nav-link items to be white by default */
 		.nav-link {
+			color: white !important;
 			font-weight: bold;
 		}
+
+		/* Change color of the active nav-link */
+		.nav-link.active {
+			color: #F28123 !important;
+		}
+
+		/* Hover effect: change nav-link color on hover */
+		.nav-link:hover {
+			color: #F28123 !important;
+		}
+
 	</style>
+
 
 	<!-- end header -->
 

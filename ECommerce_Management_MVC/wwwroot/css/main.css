@@ -675,15 +675,6 @@ h2.widget-title {
 # Hover Styles
 
 ----------------------------------------------------------------------------- */
-a.navbar-brand {
-    -webkit-transition: 0.3s;
-    -o-transition: 0.3s;
-    transition: 0.3s;
-}
-
-    a.navbar-brand:hover {
-        opacity: 0.7;
-    }
 
 a.boxed-btn {
     -webkit-transition: 0.3s;

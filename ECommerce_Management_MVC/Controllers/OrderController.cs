@@ -48,8 +48,8 @@ namespace ECommerce_Management_MVC.Controllers
                                   Order_Email = order.Order_Email,
                                   Order_Date = order.Order_Date,
                                   Order_Status = order.Order_Status,
-
                                   productName = product.Name,
+                                  CustomerName = order.customer.UserName,
                               }).ToList();
             }
             else
@@ -70,34 +70,10 @@ namespace ECommerce_Management_MVC.Controllers
 							  Order_Status = order.Order_Status,
 							  productName = product.Name,
                               CustomerId = order.customer.Id,
+                              
 						  }).Where(c => c.CustomerId == userId).ToList();
 			}
-
 			return View(result);
-			//List<OrderViewModel> orders = new List<OrderViewModel>();
-			//if (User.IsInRole("Admin"))
-			//{
-			//    orders = _orderRepository.GetAll().Select(O => new OrderViewModel
-			//    {
-			//        Id = O.Id,
-			//        amount = O.amount,
-			//        Shipping_Address = O.Shipping_Address,
-			//        Order_Address = O.Order_Address,
-			//        Order_Email = O.Order_Email,
-			//        Order_Date = O.Order_Date,
-			//        Order_Status = O.Order_Status
-			//    }).ToList();
-			//    var orderDetails = _orderDetailRepository.GetAll().Where(OD => OD.Products.Id == orders);
-			//    if (orderDetails == null)
-			//        return NotFound();
-			//}
-			//else
-			//{
-			//    var user = await _userManager.GetUserAsync(User);
-			//    var userId = user?.Id;
-			//    orders = _orderRepository.GetAll().Where(c => c.Customer_Id == userId).ToList();
-			//}
-			//return View(orders);
 		}
 
         public IActionResult GetById(int id)
@@ -162,7 +138,6 @@ namespace ECommerce_Management_MVC.Controllers
             orderViewModel.Order_Address = ordery.Order_Address;
             orderViewModel.Order_Email = ordery.Order_Email;
             orderViewModel.Order_Status = ordery.Order_Status;
-
             return View(orderViewModel);
 		}
         [HttpPost]

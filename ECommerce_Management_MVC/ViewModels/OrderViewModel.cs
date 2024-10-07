@@ -20,6 +20,7 @@ namespace ECommerce_Management_MVC.ViewModels
         public DateTime Order_Date { get; set; }
         public string Order_Status { get; set; }
         public string? CustomerId { get; set; }
+        public string? CustomerName { get; set; }
         public virtual Customer? customer { set; get; }
         public virtual List<OrderDetail>? orderDetails { get; set; }
     }

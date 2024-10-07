@@ -32,7 +32,7 @@ namespace ECommerce_Management_MVC.Controllers
             }
             var CategoryData = new CategoryViewModel();
             var totalRecords = Categories.Count();
-            int PageSize = 4;
+            int PageSize = 3;
             var totalPages = (int)Math.Ceiling(totalRecords / (double)PageSize);
             Categories = Categories.Skip((currentPage - 1) * PageSize).Take(PageSize).ToList();
             CategoryData.CurrentPage = currentPage;
@@ -75,7 +75,7 @@ namespace ECommerce_Management_MVC.Controllers
                 }
                 _categoryRepository.Add(category);
                 _categoryRepository.Save();
-                return RedirectToAction("GetAll");
+                return RedirectToAction(nameof(GetAll));
             }
             return View(nameof(GoToAddForm), CategoryVM);
         }
